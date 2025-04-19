@@ -1,8 +1,7 @@
 package com.ecommerce.clientservice.infrastructure.kafkaconfig;
 
 
-import com.ecommerce.clientservice.domain.event.AddBasketDataToOrderEvent;
-import com.ecommerce.clientservice.domain.event.RealiseOrderEvent;
+import com.ecommerce.clientservice.domain.event.*;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -37,8 +36,32 @@ public class KafkaConfig {
     }
 
     @Bean
-    public NewTopic topic_RealiseOrderEvent() {
+    public NewTopic topic_AddBasketDataToOrderEvent() {
         return TopicBuilder.name(new AddBasketDataToOrderEvent().getTopic())
+                .partitions(1)
+                .replicas(1)
+                .build();
+    }
+
+    @Bean
+    public NewTopic topic_CreateShipmentEvent() {
+        return TopicBuilder.name(new CreateShipmentEvent().getTopic())
+                .partitions(1)
+                .replicas(1)
+                .build();
+    }
+
+    @Bean
+    public NewTopic topic_RealisePaymentEvent() {
+        return TopicBuilder.name(new RealisePaymentEvent().getTopic())
+                .partitions(1)
+                .replicas(1)
+                .build();
+    }
+
+    @Bean
+    public NewTopic topic_UpdateInventoryEvent() {
+        return TopicBuilder.name(new UpdateInventoryEvent().getTopic())
                 .partitions(1)
                 .replicas(1)
                 .build();

@@ -6,7 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 public class UpdateInventoryEvent extends IEvent {
-    private final BasketDTO basket;
+    private BasketDTO basket;
 }
