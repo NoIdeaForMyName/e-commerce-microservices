@@ -36,7 +36,7 @@ public class KafkaConfig {
 
     @Bean
     public NewTopic topic_RealiseOrderEvent() {
-        return TopicBuilder.name(new RealiseOrderEvent(0L, 0L).getTopic())
+        return TopicBuilder.name(new RealiseOrderEvent().getTopic())
                 .partitions(1)
                 .replicas(1)
                 .build();

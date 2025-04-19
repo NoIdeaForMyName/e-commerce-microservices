@@ -1,4 +1,4 @@
-package com.ecommerce.orderservice.domain.event;
+package com.ecommerce.clientservice.domain.event;
 
 
 import lombok.AllArgsConstructor;
