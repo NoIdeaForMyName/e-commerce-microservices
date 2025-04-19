@@ -2,7 +2,9 @@ package com.ecommerce.clientservice;
 
 import com.ecommerce.clientservice.domain.entity.ClientEntity;
 import com.ecommerce.clientservice.domain.entity.CreditCardEntity;
+import com.ecommerce.clientservice.domain.entity.ReservationEntity;
 import com.ecommerce.clientservice.domain.repository.CreditCardRepository;
+import com.ecommerce.clientservice.domain.repository.ReservationRepository;
 import org.springframework.stereotype.Component;
 import com.ecommerce.clientservice.domain.repository.ClientRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -12,14 +14,16 @@ import java.util.Calendar;
 import java.util.Date;
 
 @Component
-public class DatabaseTester implements CommandLineRunner {
+public class DatabaseFiller implements CommandLineRunner {
 
     private final ClientRepository clientRepository;
     private final CreditCardRepository creditCardRepository;
+    private final ReservationRepository reservationRepository;
 
-    public DatabaseTester(ClientRepository clientRepository, CreditCardRepository creditCardRepository) {
+    public DatabaseFiller(ClientRepository clientRepository, CreditCardRepository creditCardRepository, ReservationRepository reservationRepository) {
         this.clientRepository = clientRepository;
         this.creditCardRepository = creditCardRepository;
+        this.reservationRepository = reservationRepository;
     }
 
     public void fillDatabase() {
@@ -38,6 +42,13 @@ public class DatabaseTester implements CommandLineRunner {
         );
         newClient.setCreditCard(newCreditCard);
         clientRepository.save(newClient);
+
+        ReservationEntity newReservation = new ReservationEntity(
+                newClient,
+                1L,
+                3
+        );
+        reservationRepository.save(newReservation);
     }
 
     @Override
@@ -45,10 +56,10 @@ public class DatabaseTester implements CommandLineRunner {
     public void run(String... args) {
         fillDatabase();
 
-        System.out.println("TEST:");
-        ClientEntity client = clientRepository.findById(1L).orElse(null);
-        System.out.println("CLIENT: " + client);
-        assert client != null;
-        System.out.println("CREDIT CARD: " + client.getCreditCard());
+//        System.out.println("TEST:");
+//        ClientEntity client = clientRepository.findById(1L).orElse(null);
+//        System.out.println("CLIENT: " + client);
+//        assert client != null;
+//        System.out.println("CREDIT CARD: " + client.getCreditCard());
     }
 }

@@ -2,6 +2,7 @@ package com.ecommerce.inventoryservice.infrastructure.service;
 
 
 import com.ecommerce.common.DTO.BasketDetailDTO;
+import com.ecommerce.inventoryservice.domain.DTO.ProductDTO;
 import com.ecommerce.inventoryservice.domain.entity.ProductEntity;
 import com.ecommerce.inventoryservice.domain.repository.ProductRepository;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -17,6 +18,11 @@ public class InventoryCommandService {
 
     public InventoryCommandService(ProductRepository productRepository) {
         this.productRepository = productRepository;
+    }
+
+    public void createProduct(ProductDTO productDTO) {
+        ProductEntity newProduct = new ProductEntity(productDTO.getName(), productDTO.getAmount(), productDTO.getQuantity());
+        productRepository.save(newProduct);
     }
 
     public void updateInventory(List<BasketDetailDTO> basketDetails) {
