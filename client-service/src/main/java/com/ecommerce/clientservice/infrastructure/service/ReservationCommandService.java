@@ -8,6 +8,8 @@ import com.ecommerce.clientservice.domain.repository.ReservationRepository;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class ReservationCommandService {
@@ -24,6 +26,12 @@ public class ReservationCommandService {
         ClientEntity client = clientRepository.findById(clientId).orElseThrow();
         ReservationEntity newReservation = new ReservationEntity(client, createReservationDTO.getProductFk(), createReservationDTO.getQuantity());
         reservationRepository.save(newReservation);
+    }
+
+    public void emptyReservations(Long clientId) {
+        ClientEntity client = clientRepository.findById(clientId).orElseThrow();
+        List<ReservationEntity> reservations = reservationRepository.findById_FkClient(client.getId());
+        reservationRepository.deleteAll(reservations);
     }
 
 }

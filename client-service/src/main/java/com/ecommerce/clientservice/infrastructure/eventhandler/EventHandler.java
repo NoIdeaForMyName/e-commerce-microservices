@@ -2,6 +2,7 @@ package com.ecommerce.clientservice.infrastructure.eventhandler;
 
 import com.ecommerce.clientservice.domain.entity.ClientEntity;
 import com.ecommerce.clientservice.domain.entity.CreditCardEntity;
+import com.ecommerce.clientservice.infrastructure.service.ReservationCommandService;
 import com.ecommerce.common.DTO.*;
 import com.ecommerce.common.events.*;
 import com.ecommerce.clientservice.infrastructure.service.ClientQueryService;
@@ -18,11 +19,13 @@ public class EventHandler {
     private final ReservationQueryService reservationQueryService;
     private final ClientQueryService clientQueryService;
     private final KafkaTemplate<String, Object> kafkaTemplate;
+    private final ReservationCommandService reservationCommandService;
 
-    public EventHandler(ReservationQueryService reservationQueryService, ClientQueryService clientQueryService, KafkaTemplate<String, Object> kafkaTemplate) {
+    public EventHandler(ReservationQueryService reservationQueryService, ClientQueryService clientQueryService, KafkaTemplate<String, Object> kafkaTemplate, ReservationCommandService reservationCommandService) {
         this.reservationQueryService = reservationQueryService;
         this.clientQueryService = clientQueryService;
         this.kafkaTemplate = kafkaTemplate;
+        this.reservationCommandService = reservationCommandService;
     }
 
     @KafkaListener(topics = "RealiseOrderEvent", groupId = "client-group")
@@ -41,15 +44,12 @@ public class EventHandler {
         UpdateInventoryEvent updateInventoryEvent = new UpdateInventoryEvent(realiseOrderEvent.getOrderId(), basket);
         kafkaTemplate.send(updateInventoryEvent.getTopic(), updateInventoryEvent);
 
-//        // sending event asking for payment processing
-//        CreditCardEntity creditCard = client.getCreditCard();
-//        CreditCardDTO creditCardDTO = new CreditCardDTO(creditCard.getNumber(), creditCard.getCVV(), creditCard.getExpirationDate());
-//        RealisePaymentEvent realisePaymentEvent = new RealisePaymentEvent(realiseOrderEvent.getOrderId(), client.getId(), creditCardDTO);
-//        kafkaTemplate.send(realisePaymentEvent.getTopic(), realisePaymentEvent);
-
         // sending event asking for shipment creation
         CreateShipmentEvent createShipmentEvent = new CreateShipmentEvent(realiseOrderEvent.getOrderId(), client.getAddress());
         kafkaTemplate.send(createShipmentEvent.getTopic(), createShipmentEvent);
+
+        // empty client basket
+        reservationCommandService.emptyReservations(client.getId());
     }
 
 }
