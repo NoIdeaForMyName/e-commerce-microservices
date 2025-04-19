@@ -50,4 +50,12 @@ public class CreateTopics {
                 .build();
     }
 
+    @Bean
+    public NewTopic topic_AddPaymentDataToOrderEvent() {
+        return TopicBuilder.name(new AddPaymentDataToOrderEvent().getTopic())
+                .partitions(1)
+                .replicas(1)
+                .build();
+    }
+
 }

@@ -1,9 +1,6 @@
 package com.ecommerce.common.kafkaconfig;
 
-import com.ecommerce.common.events.AddBasketDataToOrderEvent;
-import com.ecommerce.common.events.CreateShipmentEvent;
-import com.ecommerce.common.events.RealiseOrderEvent;
-import com.ecommerce.common.events.UpdateInventoryEvent;
+import com.ecommerce.common.events.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.kafka.common.serialization.Deserializer;
 
@@ -24,6 +21,10 @@ public class EventDeserializer implements Deserializer<Object> {
                     return objectMapper.readValue(data, CreateShipmentEvent.class);
                 case "UpdateInventoryEvent":
                     return objectMapper.readValue(data, UpdateInventoryEvent.class);
+                case "RealisePaymentEvent":
+                    return objectMapper.readValue(data, RealisePaymentEvent.class);
+                case "AddPaymentDataToOrderEvent":
+                    return objectMapper.readValue(data, AddPaymentDataToOrderEvent.class);
                 default:
                     throw new IllegalArgumentException("Unknown topic: " + topic);
             }
