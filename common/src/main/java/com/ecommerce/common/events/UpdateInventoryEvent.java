@@ -9,5 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 public class UpdateInventoryEvent extends IEvent {
+    private Long orderId;
     private BasketDTO basket;
 }

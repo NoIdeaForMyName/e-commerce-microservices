@@ -38,17 +38,17 @@ public class EventHandler {
         kafkaTemplate.send(updateOrderEvent.getTopic(), updateOrderEvent);
 
         // sending event asking for inventory update
-        UpdateInventoryEvent updateInventoryEvent = new UpdateInventoryEvent(basket);
+        UpdateInventoryEvent updateInventoryEvent = new UpdateInventoryEvent(realiseOrderEvent.getOrderId(), basket);
         kafkaTemplate.send(updateInventoryEvent.getTopic(), updateInventoryEvent);
 
-        // sending event asking for payment processing
-        CreditCardEntity creditCard = client.getCreditCard();
-        CreditCardDTO creditCardDTO = new CreditCardDTO(creditCard.getNumber(), creditCard.getCVV(), creditCard.getExpirationDate());
-        RealisePaymentEvent realisePaymentEvent = new RealisePaymentEvent(realiseOrderEvent.getOrderId(), client.getId(), creditCardDTO);
-        kafkaTemplate.send(realisePaymentEvent.getTopic(), realisePaymentEvent);
+//        // sending event asking for payment processing
+//        CreditCardEntity creditCard = client.getCreditCard();
+//        CreditCardDTO creditCardDTO = new CreditCardDTO(creditCard.getNumber(), creditCard.getCVV(), creditCard.getExpirationDate());
+//        RealisePaymentEvent realisePaymentEvent = new RealisePaymentEvent(realiseOrderEvent.getOrderId(), client.getId(), creditCardDTO);
+//        kafkaTemplate.send(realisePaymentEvent.getTopic(), realisePaymentEvent);
 
         // sending event asking for shipment creation
-        CreateShipmentEvent createShipmentEvent = new CreateShipmentEvent(realisePaymentEvent.getOrderId(), client.getAddress());
+        CreateShipmentEvent createShipmentEvent = new CreateShipmentEvent(realiseOrderEvent.getOrderId(), client.getAddress());
         kafkaTemplate.send(createShipmentEvent.getTopic(), createShipmentEvent);
     }
 
