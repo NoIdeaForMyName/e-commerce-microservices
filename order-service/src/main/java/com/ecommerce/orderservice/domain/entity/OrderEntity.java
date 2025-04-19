@@ -8,6 +8,7 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.Instant;
+import java.util.List;
 
 @Entity
 @Getter
@@ -38,4 +39,8 @@ public class OrderEntity {
     //@NotNull
     @CreationTimestamp
     private Instant createdOn;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
+    private List<OrderDetailEntity> orderDetails;
+    
 }

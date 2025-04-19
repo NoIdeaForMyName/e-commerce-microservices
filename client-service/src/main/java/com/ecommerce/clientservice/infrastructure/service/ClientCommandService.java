@@ -37,7 +37,7 @@ public class ClientCommandService {
     public void assignCreditCard(long clientId, CreditCardDTO creditCardDTO) {
         CreditCardEntity newCreditCard = new CreditCardEntity(
                 creditCardDTO.getNumber(),
-                creditCardDTO.getCVV(),
+                creditCardDTO.getCvv(),
                 creditCardDTO.getExpirationDate());
         creditCardRepository.save(newCreditCard);
         Optional<ClientEntity> client = clientRepository.findById(clientId);

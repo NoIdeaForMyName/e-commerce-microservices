@@ -1,4 +1,4 @@
-package com.ecommerce.common.DTO;
+package com.ecommerce.orderservice.domain.DTO;
 
 
 import lombok.AllArgsConstructor;
@@ -6,14 +6,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class CreditCardDTO {
-    private String number;
-    private String cvv;
-    private Date expirationDate;
+public class CreateOrderDetailDTO {
+    private Long productId;
+    private Integer quantity;
 }

@@ -1,8 +1,11 @@
 package com.ecommerce.orderservice.infrastructure.service;
 
+import com.ecommerce.orderservice.domain.DTO.CreateOrderDetailDTO;
 import com.ecommerce.orderservice.domain.DTO.PlaceOrderDTO;
+import com.ecommerce.orderservice.domain.entity.OrderDetailEntity;
 import com.ecommerce.orderservice.domain.entity.OrderEntity;
 import com.ecommerce.common.events.RealiseOrderEvent;
+import com.ecommerce.orderservice.domain.repository.OrderDetailRepository;
 import com.ecommerce.orderservice.domain.repository.OrderRepository;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
@@ -11,10 +14,12 @@ import org.springframework.stereotype.Service;
 public class OrderCommandService {
 
     private final OrderRepository orderRepository;
+    private final OrderDetailRepository orderDetailRepository;
     private final KafkaTemplate<String, Object> kafkaTemplate;
 
-    public OrderCommandService(OrderRepository orderRepository, KafkaTemplate<String, Object> kafkaTemplate) {
+    public OrderCommandService(OrderRepository orderRepository, OrderDetailRepository orderDetailRepository, KafkaTemplate<String, Object> kafkaTemplate) {
         this.orderRepository = orderRepository;
+        this.orderDetailRepository = orderDetailRepository;
         this.kafkaTemplate = kafkaTemplate;
     }
 
@@ -26,6 +31,12 @@ public class OrderCommandService {
         // send event to client microservice
         RealiseOrderEvent realiseOrderEvent = new RealiseOrderEvent(placeOrderDTO.getClientId(), order.getId());
         kafkaTemplate.send(realiseOrderEvent.getTopic(), realiseOrderEvent);
+    }
+
+    public void addDetailToOrder(Long orderId, CreateOrderDetailDTO createOrderDetailDTO) {
+        OrderEntity order = orderRepository.findById(orderId).orElseThrow();
+        OrderDetailEntity newOrderDetail = new OrderDetailEntity(order, createOrderDetailDTO.getProductId(), createOrderDetailDTO.getQuantity());
+        orderDetailRepository.save(newOrderDetail);
     }
 
 }

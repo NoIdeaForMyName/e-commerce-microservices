@@ -10,5 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 public class AddBasketDataToOrderEvent extends IEvent {
+    private Long orderId;
     private BasketDTO basket;
 }

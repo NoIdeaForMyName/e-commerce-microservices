@@ -3,11 +3,15 @@ package com.ecommerce.clientservice.domain.DTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
+@Setter
 public class CreateReservationDTO {
-    private final Long productFk;
-    private final Integer quantity;
+    private Long productFk;
+    private Integer quantity;
 }

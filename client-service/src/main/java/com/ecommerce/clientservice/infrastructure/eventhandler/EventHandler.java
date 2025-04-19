@@ -34,7 +34,7 @@ public class EventHandler {
         ClientEntity client = clientQueryService.getClient(realiseOrderEvent.getClientId());
 
         // sending event with basket data to order microservice
-        AddBasketDataToOrderEvent updateOrderEvent = new AddBasketDataToOrderEvent(basket);
+        AddBasketDataToOrderEvent updateOrderEvent = new AddBasketDataToOrderEvent(realiseOrderEvent.getOrderId(), basket);
         kafkaTemplate.send(updateOrderEvent.getTopic(), updateOrderEvent);
 
         // sending event asking for inventory update

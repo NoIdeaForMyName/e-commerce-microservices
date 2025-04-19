@@ -2,6 +2,7 @@ package com.ecommerce.clientservice.infrastructure.kafkaconfig;
 
 
 import com.ecommerce.common.events.*;
+import com.ecommerce.common.kafkaconfig.EventDeserializer;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -36,38 +37,6 @@ public class KafkaConfig {
     }
 
     @Bean
-    public NewTopic topic_AddBasketDataToOrderEvent() {
-        return TopicBuilder.name(new AddBasketDataToOrderEvent().getTopic())
-                .partitions(1)
-                .replicas(1)
-                .build();
-    }
-
-    @Bean
-    public NewTopic topic_CreateShipmentEvent() {
-        return TopicBuilder.name(new CreateShipmentEvent().getTopic())
-                .partitions(1)
-                .replicas(1)
-                .build();
-    }
-
-    @Bean
-    public NewTopic topic_RealisePaymentEvent() {
-        return TopicBuilder.name(new RealisePaymentEvent().getTopic())
-                .partitions(1)
-                .replicas(1)
-                .build();
-    }
-
-    @Bean
-    public NewTopic topic_UpdateInventoryEvent() {
-        return TopicBuilder.name(new UpdateInventoryEvent().getTopic())
-                .partitions(1)
-                .replicas(1)
-                .build();
-    }
-
-    @Bean
     public ConsumerFactory<String, Object> consumerFactory() {
         Map<String, Object> config = new HashMap<>();
         config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
@@ -80,8 +49,8 @@ public class KafkaConfig {
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, RealiseOrderEvent> kafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String, RealiseOrderEvent> factory =
+    public ConcurrentKafkaListenerContainerFactory<String, Object> kafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, Object> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
         return factory;
