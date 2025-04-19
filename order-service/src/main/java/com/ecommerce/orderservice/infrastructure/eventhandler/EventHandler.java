@@ -4,6 +4,7 @@ package com.ecommerce.orderservice.infrastructure.eventhandler;
 import com.ecommerce.common.DTO.BasketDTO;
 import com.ecommerce.common.DTO.BasketDetailDTO;
 import com.ecommerce.common.events.AddBasketDataToOrderEvent;
+import com.ecommerce.common.events.AddPaymentDataToOrderEvent;
 import com.ecommerce.orderservice.domain.DTO.CreateOrderDetailDTO;
 import com.ecommerce.orderservice.infrastructure.service.OrderCommandService;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -24,6 +25,12 @@ public class EventHandler {
     public void consume(AddBasketDataToOrderEvent addBasketDataToOrderEvent) {
         for (BasketDetailDTO baskedDetail : addBasketDataToOrderEvent.getBasket().getDetails())
             orderCommandService.addDetailToOrder(addBasketDataToOrderEvent.getOrderId(), new CreateOrderDetailDTO(baskedDetail.getProductId(), baskedDetail.getQuantity()));
+    }
+
+    @KafkaListener(topics = "AddPaymentDataToOrderEvent", groupId = "order-group")
+    @Transactional
+    public void consume(AddPaymentDataToOrderEvent addPaymentDataToOrderEvent) {
+        orderCommandService.addPaymentToOrder(addPaymentDataToOrderEvent.getOrderId(), addPaymentDataToOrderEvent.getPaymentId());
     }
 
 }

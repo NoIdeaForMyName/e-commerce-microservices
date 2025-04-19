@@ -39,4 +39,10 @@ public class OrderCommandService {
         orderDetailRepository.save(newOrderDetail);
     }
 
+    public void addPaymentToOrder(Long orderId, Long paymentId) {
+        OrderEntity order = orderRepository.findById(orderId).orElseThrow();
+        order.setFkPayment(paymentId);
+        orderRepository.save(order);
+    }
+
 }
