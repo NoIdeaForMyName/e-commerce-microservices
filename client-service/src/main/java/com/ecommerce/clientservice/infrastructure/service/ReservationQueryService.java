@@ -1,9 +1,9 @@
 package com.ecommerce.clientservice.infrastructure.service;
 
-import com.ecommerce.clientservice.domain.DTO.BasketDTO;
-import com.ecommerce.clientservice.domain.DTO.BasketDetailDTO;
 import com.ecommerce.clientservice.domain.entity.ReservationEntity;
 import com.ecommerce.clientservice.domain.repository.ReservationRepository;
+import com.ecommerce.common.DTO.BasketDTO;
+import com.ecommerce.common.DTO.BasketDetailDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

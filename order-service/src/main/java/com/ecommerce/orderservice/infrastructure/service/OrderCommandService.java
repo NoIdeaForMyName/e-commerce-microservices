@@ -2,7 +2,7 @@ package com.ecommerce.orderservice.infrastructure.service;
 
 import com.ecommerce.orderservice.domain.DTO.PlaceOrderDTO;
 import com.ecommerce.orderservice.domain.entity.OrderEntity;
-import com.ecommerce.orderservice.domain.event.RealiseOrderEvent;
+import com.ecommerce.common.events.RealiseOrderEvent;
 import com.ecommerce.orderservice.domain.repository.OrderRepository;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;

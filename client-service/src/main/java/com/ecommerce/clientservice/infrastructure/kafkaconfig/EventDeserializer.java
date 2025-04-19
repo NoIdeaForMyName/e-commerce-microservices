@@ -1,6 +1,6 @@
 package com.ecommerce.clientservice.infrastructure.kafkaconfig;
 
-import com.ecommerce.clientservice.domain.event.RealiseOrderEvent;
+import com.ecommerce.common.events.RealiseOrderEvent;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.kafka.common.serialization.Deserializer;
 

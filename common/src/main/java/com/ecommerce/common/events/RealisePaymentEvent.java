@@ -1,7 +1,7 @@
-package com.ecommerce.clientservice.domain.event;
+package com.ecommerce.common.events;
 
 
-import com.ecommerce.clientservice.domain.DTO.CreditCardDTO;
+import com.ecommerce.common.DTO.CreditCardDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

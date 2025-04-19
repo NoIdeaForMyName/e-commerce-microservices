@@ -1,11 +1,11 @@
 package com.ecommerce.clientservice.infrastructure.service;
 
 import com.ecommerce.clientservice.domain.DTO.ClientDTO;
-import com.ecommerce.clientservice.domain.DTO.CreditCardDTO;
 import com.ecommerce.clientservice.domain.entity.ClientEntity;
 import com.ecommerce.clientservice.domain.entity.CreditCardEntity;
 import com.ecommerce.clientservice.domain.repository.ClientRepository;
 import com.ecommerce.clientservice.domain.repository.CreditCardRepository;
+import com.ecommerce.common.DTO.CreditCardDTO;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

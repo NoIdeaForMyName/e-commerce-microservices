@@ -1,4 +1,4 @@
-package com.ecommerce.clientservice.domain.event;
+package com.ecommerce.common.events;
 
 
 import lombok.AllArgsConstructor;
@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public class RealiseOrderEvent extends IEvent {
-    private Long clientId;
+public class CreateShipmentEvent extends IEvent {
     private Long orderId;
+    private String address;
 }

@@ -1,4 +1,4 @@
-package com.ecommerce.orderservice.domain.event;
+package com.ecommerce.common.events;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

@@ -1,6 +1,6 @@
 package com.ecommerce.orderservice.infrastructure.kafkaconfig;
 
-import com.ecommerce.orderservice.domain.event.RealiseOrderEvent;
+import com.ecommerce.common.events.RealiseOrderEvent;
 import org.apache.kafka.clients.admin.AdminClientConfig;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.producer.ProducerConfig;

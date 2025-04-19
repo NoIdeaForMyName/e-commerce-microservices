@@ -1,11 +1,9 @@
 package com.ecommerce.clientservice.infrastructure.eventhandler;
 
-import com.ecommerce.clientservice.domain.DTO.BasketDTO;
-import com.ecommerce.clientservice.domain.DTO.CreditCardDTO;
 import com.ecommerce.clientservice.domain.entity.ClientEntity;
 import com.ecommerce.clientservice.domain.entity.CreditCardEntity;
-import com.ecommerce.clientservice.domain.event.*;
-import com.ecommerce.clientservice.infrastructure.service.ClientCommandService;
+import com.ecommerce.common.DTO.*;
+import com.ecommerce.common.events.*;
 import com.ecommerce.clientservice.infrastructure.service.ClientQueryService;
 import com.ecommerce.clientservice.infrastructure.service.ReservationQueryService;
 import org.springframework.kafka.annotation.KafkaListener;

@@ -1,7 +1,7 @@
 package com.ecommerce.clientservice.infrastructure.kafkaconfig;
 
 
-import com.ecommerce.clientservice.domain.event.*;
+import com.ecommerce.common.events.*;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;

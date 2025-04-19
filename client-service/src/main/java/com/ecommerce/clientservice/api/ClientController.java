@@ -2,10 +2,10 @@ package com.ecommerce.clientservice.api;
 
 
 import com.ecommerce.clientservice.domain.DTO.ClientDTO;
-import com.ecommerce.clientservice.domain.DTO.CreditCardDTO;
 import com.ecommerce.clientservice.domain.DTO.CreateReservationDTO;
 import com.ecommerce.clientservice.infrastructure.service.ClientCommandService;
 import com.ecommerce.clientservice.infrastructure.service.ReservationCommandService;
+import com.ecommerce.common.DTO.CreditCardDTO;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
