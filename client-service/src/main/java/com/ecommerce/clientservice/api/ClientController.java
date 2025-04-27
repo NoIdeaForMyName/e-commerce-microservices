@@ -3,6 +3,7 @@ package com.ecommerce.clientservice.api;
 
 import com.ecommerce.clientservice.domain.DTO.ClientDTO;
 import com.ecommerce.clientservice.domain.DTO.CreateReservationDTO;
+import com.ecommerce.clientservice.domain.entity.ClientEntity;
 import com.ecommerce.clientservice.infrastructure.service.ClientCommandService;
 import com.ecommerce.clientservice.infrastructure.service.ReservationCommandService;
 import com.ecommerce.common.DTO.CreditCardDTO;
@@ -28,8 +29,8 @@ public class ClientController {
         System.out.println("create client:");
         System.out.println(clientDTO.getFirstname() + "\n" + clientDTO.getLastname() + "\n" + clientDTO.getEmail());
 
-        clientCommandService.createClient(clientDTO);
-        return new ResponseEntity<>(HttpStatus.OK);
+        ClientEntity client = clientCommandService.createClient(clientDTO);
+        return new ResponseEntity<>(client, HttpStatus.CREATED);
     }
 
     @PostMapping("/{id}/credit-card")

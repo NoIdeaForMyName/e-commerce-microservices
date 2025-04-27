@@ -24,13 +24,14 @@ public class ClientCommandService {
         this.creditCardRepository = creditCardRepository;
     }
 
-    public void createClient(ClientDTO clientDTO) {
+    public ClientEntity createClient(ClientDTO clientDTO) {
         ClientEntity newClient = new ClientEntity(
                 clientDTO.getFirstname(),
                 clientDTO.getLastname(),
                 clientDTO.getEmail(),
                 clientDTO.getAddress());
         clientRepository.save(newClient);
+        return newClient;
     }
 
     @Transactional
