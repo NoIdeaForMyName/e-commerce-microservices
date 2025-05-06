@@ -13,6 +13,7 @@ FROM eclipse-temurin:17-alpine
 WORKDIR /app
 RUN addgroup -S spring && adduser -S spring -G spring
 USER spring:spring
-EXPOSE 8081
+ENV EXPOSE_PORT=8081
+EXPOSE $EXPOSE_PORT
 COPY --from=0 /build/client-service/target/*.jar ./client-service.jar
 ENTRYPOINT ["java", "-jar", "client-service.jar"]

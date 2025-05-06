@@ -13,6 +13,7 @@ FROM eclipse-temurin:17-alpine
 WORKDIR /app
 RUN addgroup -S spring && adduser -S spring -G spring
 USER spring:spring
-EXPOSE 8083
+ENV EXPOSE_PORT=8083
+EXPOSE $EXPOSE_PORT
 COPY --from=0 /build/payment-service/target/*.jar ./payment-service.jar
 ENTRYPOINT ["java", "-jar", "payment-service.jar"]

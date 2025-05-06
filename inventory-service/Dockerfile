@@ -13,6 +13,7 @@ FROM eclipse-temurin:17-alpine
 WORKDIR /app
 RUN addgroup -S spring && adduser -S spring -G spring
 USER spring:spring
-EXPOSE 8082
+ENV EXPOSE_PORT=8082
+EXPOSE $EXPOSE_PORT
 COPY --from=0 /build/inventory-service/target/*.jar ./inventory-service.jar
 ENTRYPOINT ["java", "-jar", "inventory-service.jar"]

@@ -13,6 +13,7 @@ FROM eclipse-temurin:17-alpine
 WORKDIR /app
 RUN addgroup -S spring && adduser -S spring -G spring
 USER spring:spring
-EXPOSE 8080
+ENV EXPOSE_PORT=8080
+EXPOSE $EXPOSE_PORT
 COPY --from=0 /build/order-service/target/*.jar ./order-service.jar
 ENTRYPOINT ["java", "-jar", "order-service.jar"]
